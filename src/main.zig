@@ -15,7 +15,7 @@ pub fn main() anyerror!void {
     var buf: [8]u8 = undefined;
     try std.crypto.randomBytes(buf[0..]);
     const seed = mem.readIntSliceLittle(u64, buf[0..8]);
-    var allocator = &heap.ArenaAllocator.init(heap.direct_allocator).allocator;
+    var allocator = &heap.ArenaAllocator.init(heap.page_allocator).allocator;
 
     var r = &DefaultPrng.init(seed).random;
 
